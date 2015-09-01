@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Foorumin linkki](http://teeyoshi.users.cs.helsinki.fi/tsoha/)
+* [Foorumin linkki](teeyoshi.users.cs.helsinki.fi/tsoha/)
 * [Dokumentaatio Wikissä](https://github.com/tmekkelisti/Tsoha-Bootstrap/wiki)
 
 ## Työn aihe
@@ -13,11 +13,11 @@ Järjestelmän ylläpitäjällä on oma liittymä, jonka kautta hän ylläpitä�
 
 Toimintoja:
 
-kirjautuminen
-kirjoituksen lisääminen
-kirjoitusten näyttäminen eri kriteerein
-ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen
-vastineen laatiminen ja muokkaus
-kirjoitusten poistaminen
-aiheiden määrittely, muokkaus ja poisto
+* kirjautuminen
+* kirjoituksen lisääminen
+* kirjoitusten näyttäminen eri kriteerein
+* ryhmän jäsenen lisääminen, muokkaaminen ja poistaminen
+* vastineen laatiminen ja muokkaus
+* kirjoitusten poistaminen
+* aiheiden määrittely, muokkaus ja poisto
 [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Keskustelufoorumi.html) 
