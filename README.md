@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Foorumin linkki](teeyoshi.users.cs.helsinki.fi/tsoha/)
+* [Foorumin linkki](https://teeyoshi.users.cs.helsinki.fi/tsoha/)
 * [Dokumentaatio Wikissä](https://github.com/tmekkelisti/Tsoha-Bootstrap/wiki)
 
 ## Työn aihe
@@ -20,4 +20,5 @@ Toimintoja:
 * vastineen laatiminen ja muokkaus
 * kirjoitusten poistaminen
 * aiheiden määrittely, muokkaus ja poisto
+
 [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Keskustelufoorumi.html) 
