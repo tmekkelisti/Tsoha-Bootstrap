@@ -3,7 +3,7 @@
 Yleisiä linkkejä:
 
 * [Foorumin linkki](https://teeyoshi.users.cs.helsinki.fi/tsoha/)
-* [Dokumentaatio Wikissä](https://github.com/tmekkelisti/Tsoha-Bootstrap/wiki)
+* [Dokumentaatio](https://github.com/tmekkelisti/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
