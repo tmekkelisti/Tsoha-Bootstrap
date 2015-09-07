@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <center>
+  		<div class="page-header">
+    		<h2>Foorumin käyttäminen vaatii kirjautumisen!</h2>
+	    </div>
+  </center>
+
+  <form class="form-signin">
+        <h2 class="form-signin-heading">Kirjaudu sisään</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Käyttäjänimi" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Salasana" required="">
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Kirjaudu sisään</button>
+        <a href="#">Rekisteröidy käyttäjäksi</a>
+  </form>
+
+
+
+{% endblock %}

@@ -12,4 +12,12 @@
       // Testaa koodiasi täällä
       echo 'Hello World!';
     }
+
+    public static function login(){
+      View::make('suunnitelmat/login.html');
+    }
+
+    public static function thread(){
+      View::make('suunnitelmat/show_thread.html');
+    }
   }
