@@ -20,4 +20,8 @@
     public static function thread(){
       View::make('suunnitelmat/show_thread.html');
     }
+
+    public static function new_thread(){
+      View::make('suunnitelmat/new_thread.html');
+    }
   }

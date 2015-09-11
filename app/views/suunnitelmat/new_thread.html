@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+  <h2>Luo uusi viestiketju</h2>
+
+  <form role="form">
+    <div class="form-group">
+      <label for="topic">Otsikko</label>
+      <input type="text" class="form-control" id="topic">
+    </div>
+    <div class="form-group">
+      <label for="post-content">Viesti</label>
+      <textarea class="form-control" rows="5" id="post-content"></textarea>
+    </div>
+  </form>
+
+
+{% endblock %}

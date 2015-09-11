@@ -12,6 +12,10 @@
   	HelloWorldController::login();
   });
 
+  $routes->get('/new_thread', function(){
+    HelloWorldController::new_thread();
+  });
+
   $routes->get('/thread/1', function(){
   	HelloWorldController::thread();
   });
