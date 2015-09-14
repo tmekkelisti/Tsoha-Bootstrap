@@ -1,7 +1,7 @@
 <?php
 
   $routes->get('/', function() {
-    HelloWorldController::index();
+    TopicController::index();
   });
 
   $routes->get('/hiekkalaatikko', function() {
@@ -12,10 +12,19 @@
   	HelloWorldController::login();
   });
 
-  $routes->get('/new_thread', function(){
-    HelloWorldController::new_thread();
+  //topics
+  $routes->get('/topic', function(){
+    TopicController::index();
   });
 
-  $routes->get('/thread/1', function(){
-  	HelloWorldController::thread();
+  $routes->get('/topic/new_topic', function(){
+    TopicController::new_topic();
+  });
+
+  $routes->post('/topic', function(){
+    TopicController::store();
+  });
+
+  $routes->get('/topic/:id', function($id){
+  	TopicController::show($id);
   });

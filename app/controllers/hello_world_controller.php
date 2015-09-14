@@ -1,5 +1,5 @@
 <?php
-
+  //require 'app/models/topic.php';
   class HelloWorldController extends BaseController{
 
     public static function index(){
@@ -10,7 +10,11 @@
 
     public static function sandbox(){
       // Testaa koodiasi täällä
-      echo 'Hello World!';
+      $ekatopic = Topic::find(1);
+      $topics = Topic::all();
+
+      Kint::dump($ekatopic);
+      Kint::dump($topics);
     }
 
     public static function login(){
@@ -21,7 +25,7 @@
       View::make('suunnitelmat/show_thread.html');
     }
 
-    public static function new_thread(){
-      View::make('suunnitelmat/new_thread.html');
+    public static function new_topic(){
+      View::make('topic/new_topic.html');
     }
   }
