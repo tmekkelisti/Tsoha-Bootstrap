@@ -47,7 +47,7 @@ class Topic extends BaseModel{
 	}
 
 	public function save(){
-		$query = DB::connection()->prepare('INSERT INTO Topic (topic_topic, topic_content) VALUES (:topic_topic, :topic_content) RETURNING id');
+		$query = DB::connection()->prepare('INSERT INTO Topic (topic_topic, topic_content, topic_added) VALUES (:topic_topic, :topic_content, NOW()) RETURNING id');
 		$query->execute(array('topic_topic' => $this->topic_topic, 'topic_content' => $this->topic_content));
 		$row = $query->fetch();
 

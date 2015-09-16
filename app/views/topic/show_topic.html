@@ -8,18 +8,11 @@
 </div>
 {% endif %}
 
-
-
-
-
-
-
-
 <h3>{{topic.topic_topic}}</h3>
 
 <div class="thread thread-op">
-	<div class="thread-head">
-		<span class="date">{{topic.topic_added}}</span><span class="postnumber"> #1</span>
+	<div class="thread-head"  style="background-color:black;">
+		<span class="date">{{topic.topic_added|date("d/m/Y H:i")}}</span><span class="postnumber"> #1</span>
 
 		<div style="clear: both;"></div>
 	</div>
@@ -37,17 +30,12 @@
   			<p>{{topic.topic_content}}</p>
   		</div>
 	</div>
-
-		
-	
-	
-
 </div>
 
 {% for reply in replies %}
   <div class="thread thread-op">
   <div class="thread-head">
-    <span class="date">{{reply.reply_added}}</span><span class="postnumber"> #2</span>
+    <span class="date">{{reply.reply_added|date("d/m/Y H:i")}}</span><span class="postnumber"> #2</span>
 
     <div style="clear: both;"></div>
   </div>
@@ -67,30 +55,20 @@
 </div>
 {% endfor %}
 
+<hr>
 
+<form method="POST" action="{{base_path}}/reply">
 
-<div class="thread thread-op">
-	<div class="thread-head">
-		<span class="date">11.9.2015 klo 12.31</span><span class="postnumber"> #3</span>
+    <div class="form-group">
+      <label for="reply-content">Vastaus</label>
+      <textarea class="form-control" rows="5" name="reply-content"></textarea>
+    </div>
 
-		<div style="clear: both;"></div>
-	</div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Vastaa ketjuun</button>
+    </div>
 
-
-	<div class="row">
-  		<div class="col-xs-6 col-md-3 thread-info">
-  			<a href="#">tmekkeli</a>
-  			<hr>
-  			<p>rekisteröitynyt: 17.02.2009</p>
-  			<p>viestejä: 1000</p>
-  		</div>
-  		
-  		<div class="col-xs-12 col-md-9">
-  			<p>joo jooojojojjo jojoojo okei moi kylni</p>
-  		</div>
-	</div>
-
-		
+  </form>		
 	
 	
 

@@ -22,7 +22,7 @@
 
     		<tr>
     			<td><a href="{{base_path}}/topic/{{topic.id}}">{{topic.topic_topic}}</a></td>
-    			<td style="max-width:10px">{{topic.topic_added}}<br>
+    			<td style="max-width:10px">{{ topic.topic_added|date("d/m/Y H:i") }}<br>
     				{{topic.kayttaja_id}}</td>
     		</tr>
 

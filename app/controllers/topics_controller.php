@@ -21,7 +21,7 @@ class TopicController extends BaseController{
 		$params = $_POST;
 		$topic = new Topic(array(
 			'topic_topic' => $params['topic'],
-			'topic_content' => $params['content']
+			'topic_content' => $params['content'],
 			));
 		
 		//Kint::dump($params);
