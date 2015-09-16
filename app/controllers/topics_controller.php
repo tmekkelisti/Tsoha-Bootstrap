@@ -8,7 +8,9 @@ class TopicController extends BaseController{
 
 	public static function show($id){
 		$topic = Topic::find($id);
-		View::make('topic/show_topic.html', array('topic' => $topic));
+		$replies = Reply::repliesForTopic($id);
+		Kint::dump($replies);
+		View::make('topic/show_topic.html', array('topic' => $topic, 'replies' => $replies));
 	}
 
 	public static function new_topic(){

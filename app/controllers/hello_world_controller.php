@@ -12,9 +12,10 @@
       // Testaa koodiasi täällä
       $ekatopic = Topic::find(1);
       $topics = Topic::all();
+      $replies = Reply::repliesForTopic(1);
 
-      Kint::dump($ekatopic);
-      Kint::dump($topics);
+      Kint::dump($replies);
+      
     }
 
     public static function login(){

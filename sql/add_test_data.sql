@@ -9,5 +9,8 @@ INSERT INTO Category (cat_name) VALUES ('testikategoria');
 INSERT INTO Topic (topic_topic, topic_content, topic_added) VALUES
 ('eka topikki', 'tää on kontentti', NOW());
 
-INSERT INTO Reply (reply_content, reply_added) VALUES
-('eka vastaus', NOW());
+INSERT INTO Reply (reply_content, reply_added, topic_id) VALUES
+('eka vastaus', NOW(), 1);
+
+INSERT INTO Reply (reply_content, reply_added, topic_id) VALUES
+('toka vastaus', NOW(), 1);
