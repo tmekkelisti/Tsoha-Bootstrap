@@ -12,7 +12,7 @@
 
 <div class="thread thread-op">
 	<div class="thread-head"  style="background-color:black;">
-		<span class="date">{{topic.topic_added|date("d/m/Y H:i")}}</span><span class="postnumber"> #1</span>
+		<span class="date">{{topic.topic_added|date("d/m/Y H:i")}}</span><span class="postnumber"></span>
 
 		<div style="clear: both;"></div>
 	</div>
@@ -35,7 +35,7 @@
 {% for reply in replies %}
   <div class="thread thread-op">
   <div class="thread-head">
-    <span class="date">{{reply.reply_added|date("d/m/Y H:i")}}</span><span class="postnumber"> #2</span>
+    <span class="date">{{reply.reply_added|date("d/m/Y H:i")}}</span><span class="postnumber"> #{{loop.index}}</span>
 
     <div style="clear: both;"></div>
   </div>
@@ -61,8 +61,10 @@
 
     <div class="form-group">
       <label for="reply-content">Vastaus</label>
-      <textarea class="form-control" rows="5" name="reply-content"></textarea>
+      <textarea class="form-control" rows="5" name="content"></textarea>
     </div>
+
+    <input type="hidden" name="topic-id" value="{{topic.id}}">
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Vastaa ketjuun</button>

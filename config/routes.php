@@ -28,3 +28,8 @@
   $routes->get('/topic/:id', function($id){
   	TopicController::show($id);
   });
+
+  //reply
+  $routes->post('/reply', function(){
+    ReplyController::store();
+  });

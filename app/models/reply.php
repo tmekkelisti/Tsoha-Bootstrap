@@ -41,4 +41,15 @@ class Reply extends BaseModel{
 		}
 		return $replies;
 	}
+
+	public function save(){
+		$query = DB::connection()->prepare('INSERT INTO Reply (reply_content, topic_id, reply_added) VALUES (:reply_content, :topic_id, NOW()) RETURNING topic_id');
+		$query->execute(array('reply_content' => $this->reply_content, 'topic_id' => $this->topic_id));
+		$row = $query->fetch();
+
+		//Kint::trace();
+		Kint::dump($row);
+
+		//$this->id = $row['id'];
+	}
 }
