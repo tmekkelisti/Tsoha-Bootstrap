@@ -29,6 +29,14 @@
   	TopicController::show($id);
   });
 
+  $routes->get('/topic/:id/edit', function($id){
+    TopicController::edit($id);
+  });
+
+  $routes->post('/topic/:id/edit', function($id){
+    TopicController::update($id);
+  });
+
   //reply
   $routes->post('/reply', function(){
     ReplyController::store();

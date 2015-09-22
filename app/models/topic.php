@@ -57,4 +57,10 @@ class Topic extends BaseModel{
 		$this->id = $row['id'];
 	}
 
+	public function update(){
+		$query = DB::connection()->prepare('UPDATE Topic SET topic_content = :content WHERE id = :id');
+		$query->execute(array('content' => $this->topic_content, 'id' => $this->id));
+		$row = $query->fetch();
+	}
+
 }

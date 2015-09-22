@@ -12,7 +12,12 @@
 
 <div class="thread thread-op">
 	<div class="thread-head"  style="background-color:black;">
-		<span class="date">{{topic.topic_added|date("d/m/Y H:i")}}</span><span class="postnumber"></span>
+		<span class="date">{{topic.topic_added|date("d/m/Y H:i")}}</span>
+    
+      <form method="get" action="{{base_path}}/topic/{{topic.id}}/edit" style="display: inline-block;">
+        <button type="submit"><i class="glyphicon glyphicon-pencil"></i></button>
+      </form>
+    
 
 		<div style="clear: both;"></div>
 	</div>
@@ -56,6 +61,18 @@
 {% endfor %}
 
 <hr>
+
+{% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          {% for err in error %}
+          <li>{{err}}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 
 <form method="POST" action="{{base_path}}/reply">
 

@@ -2,7 +2,7 @@
 
 {% block content %}
   
-  <h2>Luo uusi viestiketju</h2>
+  <h2>Muokkaa aloitusviestiä</h2>
 
   {% if errors %}
     <div class="alert alert-danger">
@@ -16,20 +16,22 @@
     </div>
   {% endif %}
 
-  <form method="POST" action="{{base_path}}/topic">
+  <form method="POST" action="{{base_path}}/topic/{{topic.id}}/edit">
 
     <div class="form-group">
       <label for="topic">Otsikko</label>
-      <input type="text" class="form-control" name="topic">
+      <input type="text" class="form-control" name="topic" value="{{topic.topic_topic}}" disabled>
     </div>
 
     <div class="form-group">
       <label for="post-content">Viesti</label>
-      <textarea class="form-control" rows="5" name="content"></textarea>
+      <textarea class="form-control" rows="5" name="content">{{topic.topic_content}}</textarea>
     </div>
 
+    <input type="hidden" name="topic-id" value="{{topic.id}}">
+
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Luo ketju</button>
+      <button type="submit" class="btn btn-primary">Muokkaa ketjua</button>
     </div>
 
   </form>
