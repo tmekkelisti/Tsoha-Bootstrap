@@ -2,22 +2,21 @@
 
 {% block content %}
 
-{% if message %}
-<div class="alert alert-success">
-        {{message}}
-</div>
-{% endif %}
-
 <h3>{{topic.topic_topic}}</h3>
 
 <div class="thread thread-op">
 	<div class="thread-head"  style="background-color:black;">
 		<span class="date">{{topic.topic_added|date("d/m/Y H:i")}}</span>
     
-      <form method="get" action="{{base_path}}/topic/{{topic.id}}/edit" style="display: inline-block;">
+    <span>
+      <form method="get" action="{{base_path}}/topic/{{topic.id}}/edit" class="pull-right">
         <button type="submit"><i class="glyphicon glyphicon-pencil"></i></button>
       </form>
-    
+
+      <form method="post" action="{{base_path}}/topic/{{topic.id}}/destroy" class="pull-right">
+        <button type="submit"><i class="glyphicon glyphicon-trash"></i></button>
+      </form>
+    </span>
 
 		<div style="clear: both;"></div>
 	</div>
@@ -25,7 +24,7 @@
 
 	<div class="row">
   		<div class="col-xs-6 col-md-3 thread-info">
-  			<a href="#">tmekkelikovastikoodattu</a>
+  			<a href="#">{{ topic.user_name }}</a>
   			<hr>
   			<p>rekisteröitynyt: 17.02.2009</p>
   			<p>viestejä: 1000</p>
@@ -47,7 +46,7 @@
 
   <div class="row">
       <div class="col-xs-6 col-md-3 thread-info">
-        <a href="#">tmekkelikovaa</a>
+        <a href="#">{{ reply.user_name }}</a>
         <hr>
         <p>rekisteröitynyt: 17.02.2009</p>
         <p>viestejä: 1000</p>

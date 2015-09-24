@@ -25,4 +25,42 @@ class Kayttaja extends BaseModel{
 		}
 		return $kayttajat;
 	}
+
+	public static function find($id){
+		$query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id = :id LIMIT 1');
+		$query->execute(array('id' => $id));
+		$row = $query->fetch();
+
+		if($row){
+			$user = new Kayttaja(array(
+				'id' => $row['id'],
+				'user_name' => $row['user_name'],
+				'user_password' => $row['user_password'],
+				'user_added' => $row['user_added'],
+				'user_admin' => $row['user_admin']
+			));
+			return $user;
+		}
+		return null;
+	}
+
+	public static function auth($username, $password){
+		$query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE user_name = :username AND
+		 user_password = :password LIMIT 1'); 
+		$query->execute(array(':username' => $username, ':password' => $password));
+		$row = $query->fetch();
+
+		if($row){
+			$user = new Kayttaja(array(
+				'id' => $row['id'],
+				'user_name' => $row['user_name'],
+				'user_password' => $row['user_password'],
+				'user_added' => $row['user_added'],
+				'user_admin' => $row['user_admin']
+			));
+			return $user;
+		}else{
+			return null;
+		}
+	}
 }

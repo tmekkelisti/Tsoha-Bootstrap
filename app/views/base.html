@@ -40,8 +40,12 @@
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
             <li><a href="{{base_path}}">Etusivu</a></li>
-            <li><a href="#">Oma profiili</a></li>
-            <li><a href="{{base_path}}/login">Kirjaudu sisään</a></li>
+            {% if user_logged_in %}
+              <li><a href="#">{{user_logged_in.user_name}}</a></li>
+            {% else %}
+              <li><a href="{{base_path}}/login">Kirjaudu sisään</a></li>
+            {% endif %}
+            <li><a href="{{base_path}}/login">login test</a></li>
           </ul>
         </div>
       </div>
@@ -49,6 +53,12 @@
 
     <div id="main-container">
       <!-- Dynaaminen sisältö tulee tähän -->
+      {% if message %}
+        <div class="alert alert-success">
+          {{message}}
+        </div>
+      {% endif %}
+
       {% block content %}{% endblock %}
     </div>
 

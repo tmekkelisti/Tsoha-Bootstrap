@@ -47,8 +47,8 @@ class Topic extends BaseModel{
 	}
 
 	public function save(){
-		$query = DB::connection()->prepare('INSERT INTO Topic (topic_topic, topic_content, topic_added) VALUES (:topic_topic, :topic_content, NOW()) RETURNING id');
-		$query->execute(array('topic_topic' => $this->topic_topic, 'topic_content' => $this->topic_content));
+		$query = DB::connection()->prepare('INSERT INTO Topic (topic_topic, topic_content, topic_added, kayttaja_id) VALUES (:topic_topic, :topic_content, NOW(), :kayttaja_id) RETURNING id');
+		$query->execute(array('topic_topic' => $this->topic_topic, 'topic_content' => $this->topic_content, 'kayttaja_id' => $this->kayttaja_id));
 		$row = $query->fetch();
 
 		//Kint::trace();
@@ -61,6 +61,23 @@ class Topic extends BaseModel{
 		$query = DB::connection()->prepare('UPDATE Topic SET topic_content = :content WHERE id = :id');
 		$query->execute(array('content' => $this->topic_content, 'id' => $this->id));
 		$row = $query->fetch();
+	}
+
+	public function destroy(){
+		$query = DB::connection()->prepare('DELETE FROM Topic WHERE id = :id');
+		$query->execute(array('id' => $this->id));
+		$query->fetch();
+	}
+
+	public function getAllTopicInfo($id){
+		$query = DB::connection()->prepare('SELECT Topic.topic_topic, Topic.topic_content, Topic.topic_added, Kayttaja.user_name AS user_name
+			FROM Topic
+			INNER JOIN Kayttaja
+			ON Topic.kayttaja_id = Kayttaja.id
+			WHERE topic.id = :id');
+		$query->execute(array('id' => $id));
+		$taulu = $query->fetch();
+		return $taulu;
 	}
 
 }

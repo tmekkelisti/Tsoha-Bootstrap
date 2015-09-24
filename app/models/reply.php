@@ -43,13 +43,24 @@ class Reply extends BaseModel{
 	}
 
 	public function save(){
-		$query = DB::connection()->prepare('INSERT INTO Reply (reply_content, topic_id, reply_added) VALUES (:reply_content, :topic_id, NOW()) RETURNING topic_id');
-		$query->execute(array('reply_content' => $this->reply_content, 'topic_id' => $this->topic_id));
+		$query = DB::connection()->prepare('INSERT INTO Reply (reply_content, topic_id, reply_added, kayttaja_id) VALUES (:reply_content, :topic_id, NOW(), :kayttaja_id) RETURNING topic_id');
+		$query->execute(array('reply_content' => $this->reply_content, 'topic_id' => $this->topic_id, 'kayttaja_id' => $this->kayttaja_id));
 		$row = $query->fetch();
 
 		//Kint::trace();
 		Kint::dump($row);
 
 		//$this->id = $row['id'];
+	}
+
+	public function getAllReplyInfo($id){
+		$query = DB::connection()->prepare('SELECT Reply.reply_content, Reply.reply_added, Kayttaja.user_name AS user_name
+			FROM Reply
+			INNER JOIN Kayttaja
+			ON Reply.kayttaja_id = Kayttaja.id
+			WHERE topic_id = :id');
+		$query->execute(array('id' => $id));
+		$taulu = $query->fetch();
+		return $taulu;
 	}
 }

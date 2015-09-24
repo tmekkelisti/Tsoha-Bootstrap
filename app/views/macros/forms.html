@@ -1,0 +1,6 @@
+
+{% macro destroy_button(action, text) %}
+<form method="post" action="{{action}}" class="pull-right">
+    <button type="submit"><i class="glyphicon glyphicon-trash">{{text|default('')}}</i></button>
+</form>
+{% endmacro %}

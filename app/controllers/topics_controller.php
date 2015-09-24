@@ -7,8 +7,10 @@ class TopicController extends BaseController{
 	}
 
 	public static function show($id){
-		$topic = Topic::find($id);
+		//$topic = Topic::find($id);
 		$replies = Reply::repliesForTopic($id);
+		//$replies = Reply::getAllReplyInfo($id);
+		$topic = Topic::getAllTopicInfo($id);
 		Kint::dump($replies);
 		View::make('topic/show_topic.html', array('topic' => $topic, 'replies' => $replies));
 	}
@@ -32,6 +34,7 @@ class TopicController extends BaseController{
 			$topic = new Topic(array(
 			'topic_topic' => $params['topic'],
 			'topic_content' => $params['content'],
+			'kayttaja_id' => $_SESSION['user']
 			));
 
 			$topic->save();
@@ -68,5 +71,11 @@ class TopicController extends BaseController{
 			View::make('topic/edit_topic.html', array('errors' => $v->errors(), 'message' => 'NOPE', 'topic' => $topic));
 
 		}
+	}
+
+	public static function destroy($id){
+		$topic = new Topic(array('id' => $id));
+		$topic->destroy();
+		Redirect::to('/', array('message' => 'Ketju poistettu!'));
 	}
 }

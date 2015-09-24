@@ -8,10 +8,6 @@
     HelloWorldController::sandbox();
   });
 
-  $routes->get('/login', function(){
-  	HelloWorldController::login();
-  });
-
   //topics
   $routes->get('/topic', function(){
     TopicController::index();
@@ -37,7 +33,20 @@
     TopicController::update($id);
   });
 
+  $routes->post('/topic/:id/destroy', function($id){
+    TopicController::destroy($id);
+  });
+
   //reply
   $routes->post('/reply', function(){
     ReplyController::store();
+  });
+
+  //user
+  $routes->get('/login', function(){
+    UserController::login();
+  });
+
+  $routes->post('/login', function(){
+    UserController::handle_login();
   });

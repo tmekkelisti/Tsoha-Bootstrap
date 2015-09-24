@@ -17,14 +17,14 @@ CREATE TABLE Topic(
 	topic_topic varchar(50) NOT NULL,
 	topic_content text NOT NULL,
 	topic_added TIMESTAMP,
-	kayttaja_id INTEGER REFERENCES Kayttaja(id),
-	category_id INTEGER REFERENCES Category(id)
+	kayttaja_id INTEGER REFERENCES Kayttaja(id) ON DELETE CASCADE,
+	category_id INTEGER REFERENCES Category(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Reply(
 	id SERIAL PRIMARY KEY,
 	reply_content text NOT NULL,
 	reply_added TIMESTAMP,
-	kayttaja_id INTEGER REFERENCES Kayttaja(id),
-	topic_id INTEGER REFERENCES Topic(id)
+	kayttaja_id INTEGER REFERENCES Kayttaja(id) ON DELETE CASCADE,
+	topic_id INTEGER REFERENCES Topic(id) ON DELETE CASCADE
 );

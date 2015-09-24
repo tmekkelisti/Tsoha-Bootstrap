@@ -13,10 +13,11 @@ class ReplyController extends BaseController{
 
 		if($v->validate()){
 			$reply = new Reply(array(
-			'reply_content' => $params['content']
-			,'topic_id' => $params['topic-id']
+			'reply_content' => $params['content'],
+			'topic_id' => $params['topic-id'],
+			'kayttaja_id' => $_SESSION['user']
 			));		
-			Kint::dump($params);
+			//Kint::dump($params);
 			//Kint::dump($reply);
 			$reply->save();
 			Redirect::to('/topic/' . $params['topic-id'], array('message' => 'Vastattu ketjuun'));
