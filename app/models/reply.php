@@ -54,13 +54,29 @@ class Reply extends BaseModel{
 	}
 
 	public function getAllReplyInfo($id){
-		$query = DB::connection()->prepare('SELECT Reply.reply_content, Reply.reply_added, Kayttaja.user_name AS user_name
+		$query = DB::connection()->prepare('SELECT Reply.id, Reply.reply_content, Reply.reply_added, Kayttaja.user_name
 			FROM Reply
 			INNER JOIN Kayttaja
 			ON Reply.kayttaja_id = Kayttaja.id
-			WHERE topic_id = :id');
+
+			WHERE topic_id = :id
+			ORDER BY Reply.reply_added ASC
+			');
 		$query->execute(array('id' => $id));
-		$taulu = $query->fetch();
-		return $taulu;
+		$rows = $query->fetchAll();
+		$replies = array();
+
+		foreach ($rows as $row) {
+			$replies[] = array(
+				'id' => $row['id'],
+				'reply_content' => $row['reply_content'],
+				'reply_added' => $row['reply_added'],
+				'user_name' => $row['user_name']
+				);
+		}
+
+
+		return $replies;
 	}
+
 }

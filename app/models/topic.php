@@ -70,14 +70,16 @@ class Topic extends BaseModel{
 	}
 
 	public function getAllTopicInfo($id){
-		$query = DB::connection()->prepare('SELECT Topic.topic_topic, Topic.topic_content, Topic.topic_added, Kayttaja.user_name AS user_name
+		$query = DB::connection()->prepare('SELECT Topic.id, Topic.topic_topic, Topic.topic_content, Topic.topic_added, Kayttaja.user_name AS user_name
 			FROM Topic
 			INNER JOIN Kayttaja
 			ON Topic.kayttaja_id = Kayttaja.id
 			WHERE topic.id = :id');
 		$query->execute(array('id' => $id));
-		$taulu = $query->fetch();
-		return $taulu;
+		$topic = $query->fetch();
+
+
+		return $topic;
 	}
 
 }
