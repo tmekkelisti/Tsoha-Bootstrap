@@ -22,3 +22,9 @@ Toimintoja:
 * aiheiden määrittely, muokkaus ja poisto
 
 [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Keskustelufoorumi.html) 
+
+## Käyttöohjeet
+* [Foorumin linkki](https://teeyoshi.users.cs.helsinki.fi/tsoha/)
+* username: tmekk
+* password: mitalli1
+
