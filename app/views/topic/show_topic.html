@@ -9,13 +9,17 @@
 		<span class="date">{{topic.topic_added|date("d/m/Y H:i")}}</span>
     
     <span>
+      {% if user_logged_in.id == topic.user_id %}
       <form method="get" action="{{base_path}}/topic/{{topic.id}}/edit" class="pull-right">
         <button type="submit"><i class="glyphicon glyphicon-pencil"></i></button>
       </form>
+      {% endif %}
 
+      {% if user_logged_in.user_admin %}
       <form method="post" action="{{base_path}}/topic/{{topic.id}}/destroy" class="pull-right">
         <button type="submit"><i class="glyphicon glyphicon-trash"></i></button>
       </form>
+      {% endif %}
     </span>
 
 		<div style="clear: both;"></div>
@@ -24,10 +28,9 @@
 
 	<div class="row">
   		<div class="col-xs-2 col-md-2 thread-info">
-  			<a href="#">{{ topic.user_name }}</a>
+  			<a href="{{base_path}}/user/{{topic.user_id}}">{{ topic.user_name }}</a>
   			<hr>
-  			<p>rekisteröitynyt: 17.02.2009</p>
-  			<p>viestejä: 1000</p>
+  			<p>rekisteröitynyt: {{topic.user_added|date("d.m.Y")}}</p>
   		</div>
   		
   		<div class="col-xs-10 col-md-10">
@@ -46,10 +49,9 @@
 
   <div class="row">
       <div class="col-xs-2 col-md-2 thread-info">
-        <a href="#">{{ reply.user_name }}</a>
+        <a href="{{base_path}}/user/{{reply.user_id}}">{{ reply.user_name }}</a>
         <hr>
-        <p>rekisteröitynyt: 17.02.2009</p>
-        <p>viestejä: 1000</p>
+        <p>rekisteröitynyt: {{reply.user_added|date("d.m.Y")}}</p>
       </div>
       
       <div class="col-xs-10 col-md-10">

@@ -2,24 +2,32 @@
 
 class TopicController extends BaseController{
 	public static function index(){
+		self::check_logged_in();
+
 		$topics = Topic::all();
 		View::make('home.html', array('topics' => $topics));
 	}
 
 	public static function show($id){
+		self::check_logged_in();
+
 		//$topic = Topic::find($id);
 		//$replies = Reply::repliesForTopic($id);
 		$replies = Reply::getAllReplyInfo($id);
 		$topic = Topic::getAllTopicInfo($id);
-		Kint::dump($topic);
+		//Kint::dump($topic);
 		View::make('topic/show_topic.html', array('topic' => $topic, 'replies' => $replies));
 	}
 
 	public static function new_topic(){
+		self::check_logged_in();
+
 		View::make('topic/new_topic.html');
 	}
 
 	public static function store(){
+		self::check_logged_in();
+
 		$params = $_POST;
 
 		$v = new Valitron\Validator($params);
@@ -40,18 +48,27 @@ class TopicController extends BaseController{
 			$topic->save();
 			Redirect::to('/topic/' . $topic->id, array('message' => 'Uusi viestiketju on luotu!'));
 		}else {
-			Kint::dump($v->errors());
+			//Kint::dump($v->errors());
 			View::make('topic/new_topic.html', array('errors' => $v->errors(), 'message' => 'NOPE'));
 
 		}
 	}
 
 	public static function edit($id){
+		self::check_logged_in();
+		$currentUser = self::get_user_logged_in();
 		$topic = Topic::find($id);
+
+		if($currentUser->id != $topic->kayttaja_id){
+			Redirect::to('/', array('message' => 'Ei oikeuksia!'));
+		}
+
 		View::make('topic/edit_topic.html', array('topic' => $topic));
 	}
 
 	public static function update(){
+		self::check_logged_in();
+
 		$params = $_POST;
 
 		$v = new Valitron\Validator($params);
@@ -74,6 +91,9 @@ class TopicController extends BaseController{
 	}
 
 	public static function destroy($id){
+		self::check_logged_in();
+		self::check_admin();
+		
 		$topic = new Topic(array('id' => $id));
 		$topic->destroy();
 		Redirect::to('/', array('message' => 'Ketju poistettu!'));

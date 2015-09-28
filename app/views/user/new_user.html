@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if errors %}
+      <div class="alert alert-danger">
+        <ul>
+          {% for error in errors %}
+            {% for err in error %}
+            <li>{{err}}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %} 
+
+  <form class="form-signin" method="post" action="{{base_path}}/signup">
+        <h2 class="form-signin-heading">Luo uusi käyttäjä</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="Käyttäjänimi" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Salasana" required="">
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Luo uusi käyttäjä</button>
+  </form>
+
+
+
+{% endblock %}

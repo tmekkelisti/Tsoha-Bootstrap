@@ -63,4 +63,15 @@ class Kayttaja extends BaseModel{
 			return null;
 		}
 	}
+
+	public function save(){
+		$query = DB::connection()->prepare('INSERT INTO Kayttaja (user_name, user_password, user_added, user_admin)
+		 VALUES (:user_name, :user_password, NOW(), false) RETURNING id');
+		$query->execute(array('user_name' => $this->user_name, 'user_password' => $this->user_password)); 
+		$row = $query->fetch();
+
+		$this->id = $row['id'];
+	}
+
+	
 }

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{user.user_name}} 
+
+  {% if user.user_admin %}
+  <span class="badge">admin</span>
+  {% endif %}
+</h2>
+<p>Liittynyt: {{user.user_added|date("d/m/Y H:i")}}</p>
+<p>Ketjuja: {{topicsCount.count}}</p>
+<p>Vastauksia: {{repliesCount.count}}</p>
+
+
+
+{% endblock %}

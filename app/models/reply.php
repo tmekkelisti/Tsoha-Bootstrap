@@ -54,7 +54,7 @@ class Reply extends BaseModel{
 	}
 
 	public function getAllReplyInfo($id){
-		$query = DB::connection()->prepare('SELECT Reply.id, Reply.reply_content, Reply.reply_added, Kayttaja.user_name
+		$query = DB::connection()->prepare('SELECT Reply.id, Reply.reply_content, Reply.reply_added, Kayttaja.user_name, Kayttaja.id AS user_id, Kayttaja.user_added
 			FROM Reply
 			INNER JOIN Kayttaja
 			ON Reply.kayttaja_id = Kayttaja.id
@@ -71,12 +71,21 @@ class Reply extends BaseModel{
 				'id' => $row['id'],
 				'reply_content' => $row['reply_content'],
 				'reply_added' => $row['reply_added'],
-				'user_name' => $row['user_name']
+				'user_name' => $row['user_name'],
+				'user_id' => $row['user_id'],
+				'user_added' => $row['user_added']
 				);
 		}
 
 
 		return $replies;
+	}
+
+	public static function getNumberOfRepliesByUser($id){
+		$query = DB::connection()->prepare('SELECT COUNT(Reply.id) FROM Reply
+				WHERE kayttaja_id = :id');
+		$query->execute(array('id' => $id));
+		return $query->fetch();
 	}
 
 }

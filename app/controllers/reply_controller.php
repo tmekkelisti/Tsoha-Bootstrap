@@ -3,6 +3,8 @@
 class ReplyController extends BaseController{
 	
 	public static function store(){
+		self::check_logged_in();
+
 		$params = $_POST;
 
 		$v = new Valitron\Validator($params);

@@ -50,3 +50,19 @@
   $routes->post('/login', function(){
     UserController::handle_login();
   });
+
+  $routes->post('/logout', function(){
+    UserController::logout();
+  });
+
+  $routes->get('/user/:id', function($id){
+    UserController::show($id);
+  });
+
+  $routes->get('/signup', function(){
+    UserController::new_user();
+  });
+
+  $routes->post('/signup', function(){
+    UserController::store();
+  });
