@@ -59,10 +59,18 @@
     UserController::show($id);
   });
 
+  $routes->post('/user/:id', function($id){
+    UserController::update($id);
+  });
+
   $routes->get('/signup', function(){
     UserController::new_user();
   });
 
   $routes->post('/signup', function(){
     UserController::store();
+  });
+
+  $routes->get('/user', function(){
+    UserController::all();
   });

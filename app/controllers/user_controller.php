@@ -55,5 +55,30 @@ class UserController extends BaseController{
 			View::make('user/new_user.html', array('errors' => $v->errors(), 'message' => 'NOPE!'));
 		}
 	}
+
+	public static function all(){
+		self::check_logged_in();
+		self::check_admin();
+
+		$users = Kayttaja::all();
+
+		View::make('user/all_users.html', array('users' => $users));
+	}
+
+	public static function update($id){
+		self::check_logged_in();
+		self::check_admin();
+
+		if(isset($_POST['admin'])){
+			$admin = 1;
+		}else{
+			$admin = 0;
+		}
+
+		$user = Kayttaja::find($id);
+		$user->user_admin = $admin;
+		$user->update();
+		Redirect::to('/user', array('message' => 'Käyttäjän oikeuksia muokattu'));
+	}
 	
 }

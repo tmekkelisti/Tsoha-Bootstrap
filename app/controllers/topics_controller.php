@@ -5,6 +5,7 @@ class TopicController extends BaseController{
 		self::check_logged_in();
 
 		$topics = Topic::all();
+		Kint::dump($topics);
 		View::make('home.html', array('topics' => $topics));
 	}
 

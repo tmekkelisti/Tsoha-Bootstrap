@@ -8,21 +8,26 @@ class Topic extends BaseModel{
 	}
 
 	public static function all() {
-		$query = DB::connection()->prepare('SELECT * FROM Topic');
+		$query = DB::connection()->prepare('SELECT Topic.id, Topic.topic_topic, Topic.topic_content, Topic.topic_added, Topic.kayttaja_id, Topic.category_id, Kayttaja.user_name
+		FROM Topic
+		INNER JOIN Kayttaja
+		ON Topic.kayttaja_id = Kayttaja.id
+		');
 		$query->execute();
 		$rows = $query->fetchAll();
 		$topics = array();
 
 
 		foreach ($rows as $row) {
-			$topics[] = new Topic(array(
+			$topics[] = array(
 				'id' => $row['id'],
 				'topic_topic' => $row['topic_topic'],
 				'topic_content' => $row['topic_content'],
 				'topic_added' => $row['topic_added'],
 				'kayttaja_id' => $row['kayttaja_id'],
-				'category_id' => $row['category_id']
-				));
+				'category_id' => $row['category_id'],
+				'user_name' => $row['user_name']
+				);
 		}
 		return $topics;
 	}

@@ -73,5 +73,10 @@ class Kayttaja extends BaseModel{
 		$this->id = $row['id'];
 	}
 
+	public function update(){
+		$query = DB::connection()->prepare('UPDATE Kayttaja SET user_admin = :user_admin WHERE id = :id');
+		$query->execute(array('user_admin' => $this->user_admin, 'id' => $this->id));
+		$row = $query->fetch();
+	}
 	
 }
