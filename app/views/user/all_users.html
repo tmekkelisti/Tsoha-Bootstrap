@@ -9,6 +9,7 @@
         <th>Salasana</th>
         <th>Luotu</th>
         <th>Admin</th>
+        <th>Poista</th>
       </tr>
     </thead>
     <tbody>
@@ -27,6 +28,11 @@
               {% endif %}>
               <button type="submit">Päivitä</button>
             </form>  
+          </td>
+          <td>
+            <form method="post" action="{{base_path}}/user/{{user.id}}/destroy">
+              <button type="submit"><i class="glyphicon glyphicon-trash"></i>Poista</button>
+            </form>
           </td>
         </tr>
 

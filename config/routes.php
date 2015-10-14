@@ -63,6 +63,18 @@
     UserController::update($id);
   });
 
+  $routes->get('/user/:id/edit', function($id){
+    UserController::edit($id);
+  });
+
+  $routes->post('/user/:id/edit', function($id){
+    UserController::updateUser($id);
+  });
+
+  $routes->post('/user/:id/destroy', function($id){
+    UserController::destroy($id);
+  });
+
   $routes->get('/signup', function(){
     UserController::new_user();
   });

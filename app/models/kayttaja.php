@@ -44,6 +44,17 @@ class Kayttaja extends BaseModel{
 		return null;
 	}
 
+	public static function isUsernameInDB($user_name){
+		$query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE user_name = :user_name');
+		$query->execute(array('user_name' => $user_name));
+		$row = $query->fetch();
+
+		if($row){
+			return true;
+		}
+		return false;
+	}
+
 	public static function auth($username, $password){
 		$query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE user_name = :username AND
 		 user_password = :password LIMIT 1'); 
@@ -77,6 +88,18 @@ class Kayttaja extends BaseModel{
 		$query = DB::connection()->prepare('UPDATE Kayttaja SET user_admin = :user_admin WHERE id = :id');
 		$query->execute(array('user_admin' => $this->user_admin, 'id' => $this->id));
 		$row = $query->fetch();
+	}
+
+	public function updateUser(){
+		$query = DB::connection()->prepare('UPDATE Kayttaja SET user_name = :user_name, user_password = :user_password WHERE id = :id');
+		$query->execute(array('user_name' => $this->user_name, 'user_password' => $this->user_password, 'id' => $this->id));
+		$row = $query->fetch();
+	}
+
+	public function destroy(){
+		$query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE id = :id');
+		$query->execute(array('id' => $this->id));
+		$query->fetch();
 	}
 	
 }

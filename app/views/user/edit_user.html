@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if errors %}
+      <div class="alert alert-danger">
+        <ul>
+          {% for error in errors %}
+            {% for err in error %}
+            <li>{{err}}</li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %} 
+
+  <form class="form-signin" method="post" action="{{base_path}}/user/{{user.id}}/edit">
+        <h2 class="form-signin-heading">Muokkaa käyttäjätietoja</h2>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="{{user.user_name}}" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="{{user.user_password}}" required="">
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Tallenna muokatut tiedot</button>
+  </form>
+
+
+
+{% endblock %}

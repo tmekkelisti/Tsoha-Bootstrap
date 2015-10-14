@@ -1,7 +1,7 @@
 -- Lisää CREATE TABLE lauseet tähän tiedostoon
 CREATE TABLE Kayttaja(
 	id SERIAL PRIMARY KEY,
-	user_name varchar(20) NOT NULL,
+	user_name varchar(20) NOT NULL UNIQUE,
 	user_password varchar(50) NOT NULL,
 	user_added TIMESTAMP,
 	user_admin boolean DEFAULT FALSE

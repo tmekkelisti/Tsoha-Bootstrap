@@ -8,6 +8,11 @@
   <span class="badge">admin</span>
   {% endif %}
 </h2>
+{% if user.id == user_logged_in.id %}
+  <span class="pull-right">
+  	<a href="{{base_path}}/user/{{user.id}}/edit">Muokkaa</a>
+  </span>
+{% endif %}
 <p>Liittynyt: {{user.user_added|date("d/m/Y H:i")}}</p>
 <p>Ketjuja: {{topicsCount.count}}</p>
 <p>Vastauksia: {{repliesCount.count}}</p>

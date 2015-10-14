@@ -26,7 +26,7 @@ class UserController extends BaseController{
 		$user = Kayttaja::find($id);
 		$topicsCount = Topic::getNumberOfTopicsByUser($id);
 		$repliesCount = Reply::getNumberOfRepliesByUser($id);
-		Kint::dump($topicsCount);
+		//Kint::dump($topicsCount);
 		View::make('user/show_user.html', array('user' => $user, 'topicsCount' => $topicsCount, 'repliesCount' => $repliesCount));
 	}
 
@@ -42,6 +42,10 @@ class UserController extends BaseController{
 		$v->rule('lengthMin', 'username', 4);
 		$v->rule('required', 'password');
 		$v->rule('lengthMin', 'password', 6);
+
+		if(Kayttaja::isUsernameInDB($params['username'])){
+			View::make('user/new_user.html', array('message' => 'Käyttäjätunnus jo olemassa! Valitse toinen.'));
+		}
 
 		if($v->validate()){
 			$kayttaja = new Kayttaja(array(
@@ -80,5 +84,63 @@ class UserController extends BaseController{
 		$user->update();
 		Redirect::to('/user', array('message' => 'Käyttäjän oikeuksia muokattu'));
 	}
+
+	public static function edit($id){
+		self::check_logged_in();
+
+		$currentUser = self::get_user_logged_in();
+		$user = Kayttaja::find($id);
+
+
+		if($currentUser->id != $user->id){
+			Redirect::to('/', array('message' => 'Ei oikeuksia!'));
+		}
+
+		View::make('user/edit_user.html', array('user' => $user));
+	}
 	
+	public static function updateUser($id){
+		self::check_logged_in();
+
+		$params = $_POST;
+
+		$v = new Valitron\Validator($params);
+		$v->rule('required', 'username');
+		$v->rule('lengthMin', 'username', 4);
+		$v->rule('required', 'password');
+		$v->rule('lengthMin', 'password', 6);
+
+		$currentUser = self::get_user_logged_in();
+		$user = Kayttaja::find($id);
+
+		if($currentUser->id != $user->id){
+			Redirect::to('/', array('message' => 'Ei oikeuksia!'));
+		}
+
+		if(Kayttaja::isUsernameInDB($params['username'])){
+			View::make('user/new_user.html', array('message' => 'Käyttäjätunnus jo olemassa! Valitse toinen.'));
+		}
+
+
+		if($v->validate()){
+			$user->user_name = $params['username'];
+			$user->user_password = $params['password'];
+
+			
+			Kint::dump($user);
+			$user->updateUser();
+			Redirect::to('/user/' . $user->id, array('message' => 'Käyttäjän tietoja muokattu'));
+		}else{
+			View::make('user/edit_user.html', array('errors' => $v->errors(), 'message' => 'NOPE', 'user' => $user));
+		}
+	}
+
+	public static function destroy($id){
+		self::check_logged_in();
+		self::check_admin();
+		
+		$user = new Kayttaja(array('id' => $id));
+		$user->destroy();
+		Redirect::to('/user', array('message' => 'Käyttäjä poistettu!'));
+	}
 }
