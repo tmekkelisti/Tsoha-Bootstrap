@@ -1,3 +1,5 @@
+
+
 <?php
   //require 'app/models/topic.php';
   class HelloWorldController extends BaseController{
@@ -14,7 +16,7 @@
       $topics = Topic::all();
       $replies = Reply::repliesForTopic(1);
 
-      Kint::dump($replies);
+      //Kint::dump($replies);
       
     }
 

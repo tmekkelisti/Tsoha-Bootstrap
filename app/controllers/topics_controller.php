@@ -5,7 +5,7 @@ class TopicController extends BaseController{
 		self::check_logged_in();
 
 		$topics = Topic::all();
-		Kint::dump($topics);
+		//Kint::dump($topics);
 		View::make('home.html', array('topics' => $topics));
 	}
 
@@ -83,7 +83,7 @@ class TopicController extends BaseController{
 			$topic->update();
 			Redirect::to('/topic/' . $topic->id, array('message' => 'Aloitusviestiä muokattu!'));
 		}else {
-			Kint::dump($v->errors());
+			//Kint::dump($v->errors());
 			View::make('topic/edit_topic.html', array('errors' => $v->errors(), 'message' => 'NOPE', 'topic' => $topic));
 
 		}

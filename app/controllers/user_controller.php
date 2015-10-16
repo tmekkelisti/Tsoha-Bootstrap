@@ -127,7 +127,7 @@ class UserController extends BaseController{
 			$user->user_password = $params['password'];
 
 			
-			Kint::dump($user);
+			//Kint::dump($user);
 			$user->updateUser();
 			Redirect::to('/user/' . $user->id, array('message' => 'Käyttäjän tietoja muokattu'));
 		}else{
