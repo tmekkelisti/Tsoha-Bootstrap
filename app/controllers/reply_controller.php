@@ -13,12 +13,14 @@ class ReplyController extends BaseController{
 		$v->rule('required', 'topic-id');
 		$v->rule('numeric', 'topic-id');
 
-		if($v->validate()){
-			$reply = new Reply(array(
+		$reply = new Reply(array(
 			'reply_content' => $params['content'],
 			'topic_id' => $params['topic-id'],
 			'kayttaja_id' => $_SESSION['user']
-			));		
+			));	
+
+		if($v->validate()){
+				
 			//Kint::dump($params);
 			//Kint::dump($reply);
 			$reply->save();
@@ -26,7 +28,7 @@ class ReplyController extends BaseController{
 		}else{
 			$topic = Topic::find($params['topic-id']);
 			$replies = Reply::repliesForTopic($params['topic-id']);
-			View::make('topic/show_topic.html', array('topic' => $topic, 'replies' => $replies, 'errors' => $v->errors()));
+			View::make('topic/show_topic.html', array('topic' => $topic, 'replies' => $replies, 'errors' => $v->errors(), 'reply' => $reply));
 		}
 
 

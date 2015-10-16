@@ -37,20 +37,18 @@ class TopicController extends BaseController{
 		$v->rule('required', 'content');
 		$v->rule('lengthMin', 'content', 10);
 
-
-
-		if($v->validate()){
-			$topic = new Topic(array(
+		$topic = new Topic(array(
 			'topic_topic' => $params['topic'],
 			'topic_content' => $params['content'],
 			'kayttaja_id' => $_SESSION['user']
 			));
 
+		if($v->validate()){
 			$topic->save();
 			Redirect::to('/topic/' . $topic->id, array('message' => 'Uusi viestiketju on luotu!'));
 		}else {
 			//Kint::dump($v->errors());
-			View::make('topic/new_topic.html', array('errors' => $v->errors(), 'message' => 'NOPE'));
+			View::make('topic/new_topic.html', array('errors' => $v->errors(), 'message' => 'NOPE', 'topic' => $topic));
 
 		}
 	}
